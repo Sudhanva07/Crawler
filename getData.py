@@ -6,7 +6,7 @@ class obtainData:
 #         self.link = ""
 #         self.data = list
         
-    def get_data(link):
+    def get_data(self,link):
 #         self.link = link
         data_to_send  = []
         req6 = requests.get(link)

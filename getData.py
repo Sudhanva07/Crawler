@@ -8,21 +8,30 @@ class obtainData:
         
     def get_data(link):
 #         self.link = link
-        req = requests.get(link)
         data_to_send  = []
-        soup = bs4.BeautifulSoup(req.text,"html.parser")
-        data = soup.find("div",attrs={"class","gsc_col-xs-12 gsc_col-sm-12 gsc_col-md-7 gsc_col-lg-7 overviewdetail"})
-        data_to_send.append(data.h1.get_text())
+        req6 = requests.get(link)
+        soup6 = bs4.BeautifulSoup(req6.text,"html.parser")
         
+        data9 = soup6.find("div",attrs={"class","gsc_col-xs-12 gsc_col-sm-12 gsc_col-md-7 gsc_col-lg-7 overviewdetail"})
+        data_to_send.append(data9.h1.get_text())
+
+        data10 = data9.find("div",attrs={"class","price"})
+        if data10 == None:
+            data_to_send.append("varient Experied")
+        else:
+            price = data10.get_text().split('*')
+            data_to_send.append(price[0])
+
+        data6 = soup6.find_all("div",attrs={"data-id","Overview"})
+        data7 = soup6.find("td",text="Fuel Type").parent
+        data8 = data7.parent
+        for dat in data8:
+            data_to_send.append(dat.span.get_text())
         
-        data2 = data.find("div",attrs={"class","price"})
-        price = data2.get_text().split('*')
-        data_to_send.append(price[0])
-        
-        
-        data = soup.find_all("td",attrs={"class","gsc_col-xs-12 textHold"})
-        for dat in data:
-            data_to_send.append(dat.get_text())
-#             print(type(dat.get_text()))
+        data9 = soup6.find("td",text="City Mileage")
+        if data9 == None:
+            data_to_send.insert(3,"None") 
+#         print(soup6.find("td",text="City Mileage"))
+
         
         return data_to_send

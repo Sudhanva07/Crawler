@@ -7,7 +7,7 @@ import requests
 
 
 def get_data(link):
-#         self.link = link
+
     data_to_send  = []
     data_to_get =[]
     req6 = requests.get(link)
@@ -40,20 +40,15 @@ def get_data(link):
         data = dat.find_all("td")
         for tdata in data:
             data_to_get.append(tdata.get_text())
-#                 data = 1
+    #                 data = 1
     for dat in data_in_single:
         daa = dat.find_all("i")
         for da in daa:
             data_to_get.append(da.get_text()[0:1000])
-#                 dara =1 
+    #                 dara =1 
     data_left = data_to_get[::2]
     data_right = data_to_get[1::2]
-#         print(data_left)
-#         print(data_right)
 
-#         img_link = soup6.select(".modelimage")
-#         for im in img_link:
-#             print(im.find("li").img.attrs['src'])
 
 
     return data_to_send,data_left,data_right
